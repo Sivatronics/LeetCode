@@ -84,12 +84,50 @@ namespace LeetCode
             //Console.WriteLine("exit loop: {0}", n);
         }
 
+        public LinkedList MergeTwoLinkedLists(LinkedList input1, LinkedList input2)
+        {
+            //var head1 = new LinkedList(0);
+            //var tail1 = head1;
+            ////tail1 = input1;
+            //tail1.next = input2;
+            //tail1 = tail1.next;
+            //head1 = new LinkedList(9);
+
+            //var head2 = new LinkedList(0);
+            //var tail2 = head2;
+            ////head2 = input1;
+            //head2.next = input2;
+
+
+            var pointer1 = input1;
+            var pointer2 = input2;
+            var head = new LinkedList(0);
+            var tail = head;
+            while(pointer1!=null && pointer2!=null)
+            {
+                if(pointer1.value < pointer2.value)
+                {
+                    tail.next = pointer1;
+                    pointer1 = pointer1.next;
+                }
+                else
+                {
+                    tail.next = pointer2;
+                    pointer2 = pointer2.next;
+                }
+                tail = tail.next;
+            }
+            tail.next = pointer1 ?? pointer2;
+            return head.next;
+
+        }
+
         public LinkedList RemoveDuplicatesFromLinkedList(LinkedList input)
         {
             LinkedList current = input;
-            while (current !=null && current.next !=null)
+            while (current != null && current.next != null)
             {
-                if(current.value == current.next.value)
+                if (current.value == current.next.value)
                 {
                     current.next = current.next.next;
                 }
